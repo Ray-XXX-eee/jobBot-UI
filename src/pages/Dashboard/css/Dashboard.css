@@ -1,0 +1,77 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap'); */
+
+.appContainer {
+  display: flex;
+}
+
+.contentContainer {
+  width: 100%;
+}
+
+.headerContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between
+}
+
+.cust-header {
+  width: 100%;
+  max-height: fit-content;
+}
+
+.cust-flex-0 {
+  display: flex;
+  width: 100%;
+  justify-content: space-between
+}
+
+.cust-flex-1 {
+  display: flex;
+  width: 50%;
+  float: left;
+}
+
+.cust-flex-2 {
+  display: flex;
+  float: right;
+}
+
+.sideBarContainer {}
+
+.custSidebar-0 {
+  height: 100vh;
+}
+
+.createPostContainer {
+  margin: 1rem;
+}
+
+.footer-container {
+  min-height: 100vh
+}
+
+.cust-btn-1 {
+  padding-right: 2px;
+}
+
+.custBtnApply {
+  --bs-btn-hover-bg: #167506;
+  --bs-btn-hover-border-color: #167506;
+  --bs-btn-active-color: #167506;
+  --bs-btn-active-bg: #198754;
+
+}
+
+.custPostContainer {
+  max-width: 100%;
+  padding: 10px;
+  margin: 10px 20px;
+}
+
+.custTags {
+  margin-right: 3px;
+}
+
+.custJobTitle {
+  font-weight: 600;
+}
