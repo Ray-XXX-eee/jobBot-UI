@@ -7,6 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import PostList from "./pages/Dashboard/components/PostList";
 import CreatePost from "./pages/Dashboard/components/CreatePost";
 import Test from "./test/Test";
+import PrivateRoute from "./pages/PrivateRoute";
 
 const router = createBrowserRouter([
   { path: "/register", element: <Register /> },
@@ -14,13 +15,21 @@ const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
   {
     path: "/",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
     children: [
-      { path: "/", element: <PostList /> },
-      { path: "/create-post", element: <CreatePost /> },
+      {
+        path: "/",
+        element: <PostList />,
+      },
+      { path: "/post-job", element: <CreatePost /> },
     ],
   },
 ]);
+
 function App() {
   return <RouterProvider router={router} />;
 }

@@ -5,17 +5,19 @@ import { FaEye } from "react-icons/fa";
 import "../css/Register.css";
 import { Link } from "react-router-dom";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = "/register";
 
 const Register = () => {
   const userRef = useRef();
   const errRef = useRef();
+  const fnameRef = useRef();
+  const lnameRef = useRef();
 
-  const [user, setUser] = useState("");
-  const [validName, setValidName] = useState(false);
-  const [userFocus, setUserFocus] = useState(false);
+  const [userEmail, setuserEmail] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
 
   const [pwd, setPwd] = useState("");
   const [validPwd, setValidPwd] = useState(false);
@@ -33,8 +35,8 @@ const Register = () => {
   }, []);
 
   useEffect(() => {
-    setValidName(USER_REGEX.test(user));
-  }, [user]);
+    setValidEmail(EMAIL_REGEX.test(userEmail));
+  }, [userEmail]);
 
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
@@ -43,14 +45,19 @@ const Register = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd, matchPwd]);
+  }, [userEmail, pwd, matchPwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const v1 = USER_REGEX.test(user);
+    const v1 = EMAIL_REGEX.test(userEmail);
     const v2 = PWD_REGEX.test(pwd);
-    if (!v1 || !v2) {
-      setErrMsg("Invalid Entry");
+
+    console.log(fnameRef.current.value, "   ", lnameRef.current.value, " ", userEmail, " ", pwd);
+
+    //To-DO : Call user  POST API
+
+    if (!v1 || !v2 || fnameRef.current.value == " " || lnameRef.current.value == "") {
+      setErrMsg("Please Fill all fields");
       return;
     }
   };
@@ -71,35 +78,40 @@ const Register = () => {
               {errMsg}
             </p>
             <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="username">
-                Username:
-                <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
-                <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
+            <form onSubmit={handleSubmit} autoComplete="off">
+              {/* first name */}
+              <label htmlFor="firstName">First Name:</label>
+              <input className="form-control" type="text" id="firstName" ref={fnameRef} />
+
+              {/* last name */}
+              <label htmlFor="firstName">First Name:</label>
+              <input className="form-control" type="text" id="lastName" ref={lnameRef} />
+
+              {/* email */}
+              <label htmlFor="email">
+                Email:
+                <FontAwesomeIcon icon={faCheck} className={validEmail ? "valid" : "hide"} />
+                <FontAwesomeIcon icon={faTimes} className={validEmail || !userEmail ? "hide" : "invalid"} />
               </label>
               <input
                 className="form-control"
                 type="text"
-                id="username"
+                id="email"
                 ref={userRef}
-                autoComplete="off"
-                onChange={(e) => setUser(e.target.value)}
-                value={user}
+                onChange={(e) => setuserEmail(e.target.value)}
+                value={userEmail}
                 required
-                aria-invalid={validName ? "false" : "true"}
+                aria-invalid={validEmail ? "false" : "true"}
                 aria-describedby="uidnote"
-                onFocus={() => setUserFocus(true)}
-                onBlur={() => setUserFocus(false)}
+                onFocus={() => setEmailFocus(true)}
+                onBlur={() => setEmailFocus(false)}
               />
-              <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
+              <p id="uidnote" className={emailFocus && userEmail && !validEmail ? "instructions" : "offscreen"}>
                 <FontAwesomeIcon icon={faInfoCircle} />
-                4 to 24 characters.
-                <br />
-                Must begin with a letter.
-                <br />
-                Letters, numbers, underscores, hyphens allowed.
+                Enter a valid email ID
               </p>
 
+              {/* password */}
               <label htmlFor="password">
                 Password:
                 <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
@@ -132,6 +144,7 @@ const Register = () => {
                 </p>
               </div>
 
+              {/* cnf pwd */}
               <label htmlFor="confirm_pwd">
                 Confirm Password:
                 <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
@@ -159,10 +172,14 @@ const Register = () => {
                 Must match the first password input field.
               </p>
               <br />
-              <button className="btn btn-primary" disabled={!validName || !validPwd || !validMatch ? true : false}>
+
+              {/* Submit */}
+              <button className="btn btn-primary" disabled={!validEmail || !validPwd || !validMatch ? true : false}>
                 Sign Up
               </button>
             </form>
+
+            {/* Footer */}
             <p>
               Already registered?
               <br />

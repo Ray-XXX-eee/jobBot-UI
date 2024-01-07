@@ -24,7 +24,7 @@ const Sidebar = ({ selectedContent, setSelectedContent }) => {
             </Link>
           </li>
           <li>
-            <Link to="/create-post" className={`nav-link text-white ${selectedContent === "Create Post" && "active"}`} onClick={handleButtonClick}>
+            <Link to="/post-job" className={`nav-link text-white ${selectedContent === "Create Post" && "active"}`} onClick={handleButtonClick}>
               <svg className="bi pe-none me-2" width="16" height="16">
                 <use xlinkHref="#speedometer2"></use>
               </svg>
