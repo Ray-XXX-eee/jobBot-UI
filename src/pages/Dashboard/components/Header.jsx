@@ -47,13 +47,13 @@ const Header = () => {
                 <input type="search" className="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search" />
               </form>
 
-              <Link to="/register" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <Link to="/login" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <button type="button" className="btn btn-outline-light me-2">
                   Login
                 </button>
               </Link>
 
-              <Link to="#" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <Link to="/register" className="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <button type="button" className="btn btn-outline-light me-2">
                   Sign-up
                 </button>

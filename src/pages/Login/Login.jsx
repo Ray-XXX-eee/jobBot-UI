@@ -1,11 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useRef, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import "./Login.css";
 import { Link } from "react-router-dom";
+import axios from "../../server/axios";
+import MainContext from "../../store/AppContext";
 
-const Register = () => {
+const LOGIN_URL = "/login";
+
+const Login = () => {
+  let { setisAuth } = useContext(MainContext);
+  const navigate = useNavigate();
   const emailRef = useRef();
   const pwdRef = useRef();
   const errRef = useRef();
@@ -16,9 +21,27 @@ const Register = () => {
     e.preventDefault();
 
     //TODO : call Login post api
-    if (emailRef.current.value == " " || pwdRef.current.value == "") {
+    const email = emailRef.current.value;
+    const pwd = pwdRef.current.value;
+    if (email == " " || pwd == "") {
       setErrMsg("Please provide email & password");
     } else {
+      try {
+        console.log(email, pwd);
+        const response = await axios.post(
+          LOGIN_URL,
+          JSON.stringify({
+            email,
+            password: pwd,
+          }),
+          {
+            headers: { "content-type": "application/json" },
+          }
+        );
+        console.log(JSON.stringify(response?.data));
+        // setisAuth(true);
+        // setSuccess(true);
+      } catch (error) {}
     }
   };
 
@@ -28,7 +51,7 @@ const Register = () => {
         <section>
           <h1>Success!</h1>
           <p>
-            <Link to="#">Sign In</Link>
+            <Link to="/">Dashboard</Link>
           </p>
         </section>
       ) : (
@@ -56,7 +79,17 @@ const Register = () => {
             </form>
 
             <p>
-              <a href="#">Forgot Password ?</a>
+              {/* Footer */}
+              <p>
+                <a href="#">Forgot Password ?</a>
+                <br />
+                Not registered?
+                <br />
+                <span className="line">
+                  {/*put router link here*/}
+                  <Link to="/register">Register</Link>
+                </span>
+              </p>
             </p>
           </section>
         </center>
@@ -65,4 +98,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

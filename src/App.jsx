@@ -8,6 +8,7 @@ import PostList from "./pages/Dashboard/components/PostList";
 import CreatePost from "./pages/Dashboard/components/CreatePost";
 import Test from "./test/Test";
 import PrivateRoute from "./pages/PrivateRoute";
+import ContextProvider from "./store/AppContext";
 
 const router = createBrowserRouter([
   { path: "/register", element: <Register /> },
@@ -16,9 +17,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <PrivateRoute>
-        <Dashboard />
-      </PrivateRoute>
+      <ContextProvider>
+        <PrivateRoute>
+          <Dashboard />
+        </PrivateRoute>
+      </ContextProvider>
     ),
     children: [
       {

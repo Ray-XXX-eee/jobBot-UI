@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ContextProvider from "../../../store/AppContext";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -11,17 +10,15 @@ const Dashboard = () => {
 
   return (
     <div>
-      <ContextProvider>
-        <div className="appContainer">
-          <Sidebar selectedContent={selectedContent} setSelectedContent={setSelectedContent}></Sidebar>
-          <div className="contentContainer">
-            <Header></Header>
-            <Outlet />
-            <Footer></Footer>
-          </div>
+      <div className="appContainer">
+        <Sidebar selectedContent={selectedContent} setSelectedContent={setSelectedContent}></Sidebar>
+        <div className="contentContainer">
+          <Header></Header>
+          <Outlet />
+          <Footer></Footer>
         </div>
-        <h1>test</h1>
-      </ContextProvider>
+      </div>
+      <h1>test</h1>
     </div>
   );
 };

@@ -2,25 +2,24 @@ import { createContext, useReducer, useState } from "react";
 
 const addPost = () => {};
 const deletePost = () => {};
+// const [isAuth, setIsAuth] = useState(false);
 
 const reducerFuncion = (currPostList, actions) => {
   return currPostList;
 };
 
-export const Context = createContext({
+const Context = createContext({
   postList: [],
   addPost: () => {},
   deletePost: () => {},
 });
 
-const ContextProvider = ({ children }) => {
+export const ContextProvider = ({ children }) => {
   /* CreateContext (useContext) hook: Is used as provider of  States & Methods to be passed to all the components
   useState or useReducerState: State can be set using either of these Hooks
    */
 
   const [initPostList, setinitPostList] = useState(DEFAULT_POST_LIST);
-  // const [initPostList, dispatchPostList] = useReducer(reducerFuncion, DEFAULT_POST_LIST);
-  console.log(initPostList);
 
   return (
     <Context.Provider
@@ -77,4 +76,4 @@ const DEFAULT_POST_LIST = [
     tags: ["Python", "react", "MERN"],
   },
 ];
-export default ContextProvider;
+export default Context;
