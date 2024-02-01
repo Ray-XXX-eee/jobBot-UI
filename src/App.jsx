@@ -9,11 +9,26 @@ import CreatePost from "./pages/Dashboard/components/CreatePost";
 import Test from "./test/Test";
 import PrivateRoute from "./pages/PrivateRoute";
 import ContextProvider from "./store/AppContext";
+import SeekerSettings from "./pages/Dashboard/components/SeekerSettings";
 
 const router = createBrowserRouter([
-  { path: "/register", element: <Register /> },
+  {
+    path: "/register",
+    element: (
+      <ContextProvider>
+        <Register />
+      </ContextProvider>
+    ),
+  },
   { path: "/test", element: <Test /> },
-  { path: "/login", element: <Login /> },
+  {
+    path: "/login",
+    element: (
+      <ContextProvider>
+        <Login />
+      </ContextProvider>
+    ),
+  },
   {
     path: "/",
     element: (
@@ -29,6 +44,7 @@ const router = createBrowserRouter([
         element: <PostList />,
       },
       { path: "/post-job", element: <CreatePost /> },
+      { path: "/seeker-settings", element: <SeekerSettings /> },
     ],
   },
 ]);

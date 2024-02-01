@@ -4,12 +4,13 @@ import { FaEye } from "react-icons/fa";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import axios from "../../server/axios";
-import MainContext from "../../store/AppContext";
+import { Context } from "../../store/AppContext";
 
 const LOGIN_URL = "/login";
 
 const Login = () => {
-  let { setisAuth } = useContext(MainContext);
+  const { isAuth, setisAuth, login } = useContext(Context);
+  console.log("is auth ??? login ", isAuth);
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwdRef = useRef();
@@ -18,6 +19,7 @@ const Login = () => {
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
+    console.log("click log in");
     e.preventDefault();
 
     //TODO : call Login post api
@@ -27,7 +29,6 @@ const Login = () => {
       setErrMsg("Please provide email & password");
     } else {
       try {
-        console.log(email, pwd);
         const response = await axios.post(
           LOGIN_URL,
           JSON.stringify({
@@ -38,22 +39,24 @@ const Login = () => {
             headers: { "content-type": "application/json" },
           }
         );
-        console.log(JSON.stringify(response?.data));
-        // setisAuth(true);
-        // setSuccess(true);
-      } catch (error) {}
+
+        console.log(JSON.stringify(response?.data), "after resp : ");
+        setSuccess(true);
+        setisAuth(true);
+      } catch (error) {
+        console.error("Login error:", error);
+      }
     }
   };
+
+  useEffect(() => {
+    console.log("isAuth inside Login component:", isAuth);
+  }, [isAuth]);
 
   return (
     <>
       {success ? (
-        <section>
-          <h1>Success!</h1>
-          <p>
-            <Link to="/">Dashboard</Link>
-          </p>
-        </section>
+        navigate("/")
       ) : (
         <center>
           <section className="d-inline-flex p-2 m-5">
@@ -74,7 +77,7 @@ const Login = () => {
               </div>
 
               <button type="submit" className="btn btn-primary">
-                Sign Up
+                Sign In
               </button>
             </form>
 
