@@ -17,7 +17,7 @@ const ContextProvider = ({ children }) => {
 
   const [initPostList, setinitPostList] = useState(DEFAULT_POST_LIST);
   // const isAuth = false;
-  const [isAuth, setisAuth] = useState(false);
+  const [isAuth, setisAuth] = useState(true);
 
   const setAuth = (auth) => {
     auth ? setisAuth(auth) : console.log("setauth error");
