@@ -48,11 +48,11 @@ const router = createBrowserRouter(
         { path: "/seeker-settings", element: <SeekerSettings /> },
       ],
     },
-  ],
-  {
-    // Add the basename here
-    basename: "/jobBot-UI",
-  }
+  ]
+  // {
+  //   // Add the basename here
+  //   basename: "/jobBot-UI",
+  // }
 );
 
 function App() {
