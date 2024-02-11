@@ -28,20 +28,28 @@ jobs:
         run: npm run build
       - name: show files
         run: ls
-
-      - name: Archive Test Results
-        uses: actions/upload-artifact@v3
-        if: always()
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          name: prod-build
-          path: dist
+          # Upload dist repository
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+        
+      # - name: Archive Test Results
+      #   uses: actions/upload-artifact@v3
+      #   if: always()
+      #   with:
+      #     name: prod-build
+      #     path: dist
           
-      - name: Deploy APP to GitHub Page
-        uses: peaceiris/actions-gh-pages@v3
-        if: always()
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+      # - name: Deploy APP to GitHub Page
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   if: always()
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: dist
 
 
 
