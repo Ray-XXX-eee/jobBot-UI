@@ -1,15 +1,12 @@
 name: Custom_Deploy
-
 on:
   push:
-    branches: [ main, master ]
-  # pull_request:
-  #   branches: [ main, master ]
+    branches:
+      - main
 
 jobs:
   build:
     name: Build
-    timeout-minutes: 60
     runs-on: ubuntu-latest
 
     steps:
@@ -19,23 +16,20 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 16.*
+          node-version: 18.*
 
       - name: Install dependencies
         run: npm i
 
       - name: Build project
         run: npm run build
-      - name: show files
-        run: ls
-    
-      - name: Upload Build file
-        uses: actions/upload-artifact@v3
-        if: always()
+
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v4
         with:
           name: production-files
           path: ./dist
-  
+
   deploy:
     name: Deploy
     needs: build
@@ -53,10 +47,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  
-
-
-
-
-
-
+          publish_dir: ./dist
