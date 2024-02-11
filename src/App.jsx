@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Dashboard from "./pages/Dashboard/components/Dashboard";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Registration/components/Register";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createHashRouter } from "react-router-dom";
 import PostList from "./pages/Dashboard/components/PostList";
 import CreatePost from "./pages/Dashboard/components/CreatePost";
 import Test from "./test/Test";
@@ -11,7 +11,7 @@ import PrivateRoute from "./pages/PrivateRoute";
 import ContextProvider from "./store/AppContext";
 import SeekerSettings from "./pages/Dashboard/components/SeekerSettings";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   [
     {
       path: "/register",
@@ -56,7 +56,12 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+
+  return (<>
+  <RouterProvider router={router} />;
+  
+
+  </>)
 }
 
 export default App;
