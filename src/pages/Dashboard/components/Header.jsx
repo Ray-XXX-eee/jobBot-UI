@@ -3,13 +3,6 @@ import { Context } from "../../../store/AppContext";
 import "../css/Dashboard.css";
 import { Link } from "react-router-dom";
 const Header = () => {
-  // const { isAuth, setisAuth } = useContext(Context);
-  // const handleLogout = (e) => {
-  //   e.preventDefault();
-  //   console.log("inside handler", isAuth);
-  //   Context.setisAuth(false);
-  // };
-
   return (
     <div className="headerContainer">
       <header className="cust-header p-3 text-bg-dark">

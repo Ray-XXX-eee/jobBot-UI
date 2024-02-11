@@ -9,14 +9,15 @@ import { Context } from "../../store/AppContext";
 const LOGIN_URL = "/login";
 
 const Login = () => {
-  const { isAuth, setisAuth, login } = useContext(Context);
-  console.log("is auth ??? login ", isAuth);
+  const { isAuth, setAuthlogin} = useContext(Context);
+  console.log("is auth ??? Inside login first log ", isAuth);
   const navigate = useNavigate();
   const emailRef = useRef();
   const pwdRef = useRef();
   const errRef = useRef();
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+
 
   const handleSubmit = async (e) => {
     console.log("click log in");
@@ -42,7 +43,7 @@ const Login = () => {
 
         console.log(JSON.stringify(response?.data), "after resp : ");
         setSuccess(true);
-        setisAuth(true);
+        setAuthlogin();
       } catch (error) {
         console.error("Login error:", error);
       }
@@ -50,7 +51,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log("isAuth inside Login component:", isAuth);
+    console.log("isAuth inside Login component useeffect:", isAuth);
   }, [isAuth]);
 
   return (

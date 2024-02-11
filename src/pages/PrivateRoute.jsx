@@ -4,8 +4,8 @@ import { Context } from "../store/AppContext";
 
 const PrivateRoute = ({ children }) => {
   const navigate = useNavigate();
-  const { isAuth } = useContext(Context);
-  console.log("is auth ??? private ", isAuth);
+  const { isAuth, } = useContext(Context);
+  console.log("is auth ??? inside private rout ", isAuth);
 
   useEffect(() => {
     if (!isAuth) {

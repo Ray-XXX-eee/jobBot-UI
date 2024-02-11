@@ -2,7 +2,6 @@ import { createContext, useEffect, useReducer, useState } from "react";
 
 const addPost = () => {};
 const deletePost = () => {};
-// const [isAuth, setIsAuth] = useState(false);
 
 export const Context = createContext({
   postList: [],
@@ -17,14 +16,26 @@ const ContextProvider = ({ children }) => {
 
   const [initPostList, setinitPostList] = useState(DEFAULT_POST_LIST);
   // const isAuth = false;
-  const [isAuth, setisAuth] = useState(true);
+  // const [isAuth, setisAuth] = useState(true);
 
-  const setAuth = (auth) => {
-    auth ? setisAuth(auth) : console.log("setauth error");
+  
+
+  const [isAuth, setIsAuth] = useState(false);
+  console.log("isAuth inside context 1st log:", isAuth);
+
+  const setAuthlogin = () => {
+    // Logic for successful login
+    setIsAuth(true);
   };
+
+  const setAuthlogout = () => {
+    // Logic for logout
+    setIsAuth(false);
+  };
+
   useEffect(() => {
     // This effect runs whenever isAuth changes
-    console.log("isAuth inside context:", isAuth);
+    console.log("isAuth inside context use effect:", isAuth);
   }, [isAuth]);
 
   return (
@@ -34,7 +45,8 @@ const ContextProvider = ({ children }) => {
         addPost,
         deletePost,
         isAuth,
-        setisAuth,
+        setAuthlogin,
+        setAuthlogout
       }}
     >
       {children}

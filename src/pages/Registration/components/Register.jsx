@@ -58,19 +58,23 @@ const Register = () => {
 
     if (!v1 || !v2 || fnameRef.current.value == " " || lnameRef.current.value == "") {
       setErrMsg("Please Fill all fields");
-      return;
-    }
+    } else {
+      try {
+        // await axios.post(
+
+        // )
+      } catch (error) {
+        
+      }
+
+    };
+    
   };
 
   return (
     <>
       {success ? (
-        <section>
-          <h1>Success!</h1>
-          <p>
-            <Link to="#">Sign In</Link>
-          </p>
-        </section>
+        navigate("/login")
       ) : (
         <center>
           <section className="d-inline-flex p-2 m-5">
